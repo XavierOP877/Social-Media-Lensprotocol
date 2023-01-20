@@ -1,36 +1,17 @@
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react"
 import { PublicationSortCriteria, useExplorePublicationsQuery } from "../graphql/generated"
+import useLogin from "../lib/auth/useLogin";
 
 
 
 export default function Home() {
 
 
-  const {
-    data, isLoading, error
-  } = useExplorePublicationsQuery({
-    endpoint: "https://api.lens.dev",
-    fetchParams: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  },
-  {
-    request: {
-      sortCriteria: PublicationSortCriteria.TopCollected,
-    },
+  const address = useAddress();
+  const {mutate: requestLogin} = useLogin();
+  if(!address){
+    return (<ConnectWallet/>)
   }
-  );
 
-   
-  console.log({
-    data,
-    isLoading,
-    error,
-  });
-
-
-  return <>
-        Hello World
-    </>
+  return <button onClick={() => requestLogin()}>Login</button>;
 }
