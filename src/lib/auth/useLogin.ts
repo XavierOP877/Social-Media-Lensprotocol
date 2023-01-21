@@ -9,6 +9,7 @@ import { useAuthenticateMutation } from "@/src/graphql/generated";
 import { useMutation } from "@tanstack/react-query";
 import { useAddress, useSDK } from "@thirdweb-dev/react";
 import generateChallenge from "./generateChallenge";
+import { setAccessToken } from "./helpers";
 
 
 export default function useLogin(){
@@ -34,6 +35,9 @@ export default function useLogin(){
 
 
         console.log("Authenticated:", authenticate);
+
+        const {accessToken, refreshToken} = authenticate;
+        setAccessToken(accessToken, refreshToken);
     }
 
     return useMutation(login);
