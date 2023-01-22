@@ -9,10 +9,7 @@ export default function useLensUser() {
 
     const localStorageQuery = useQuery(
         ["lens-user", address],
-        () => {
-            const token = readAccessToken();
-            return token;
-        }
+        () => readAccessToken()
     );
 
     const profileQuery = useDefaultProfileQuery({
@@ -20,8 +17,15 @@ export default function useLensUser() {
             ethereumAddress: address,
         }
     },
-    
-    )
+    {
+        enabled: !!address,
+    }
+    );
+
+    return{
+        isSignedInQuery: localStorageQuery,
+        profileQuery: profileQuery,
+    };
 
     
 }
