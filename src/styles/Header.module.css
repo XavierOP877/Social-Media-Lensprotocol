@@ -8,7 +8,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: darkslategray;
+    background-color: #50c84a;
     border-bottom: 1px solid white;
     z-index: 99999;
   }
@@ -17,6 +17,7 @@
     height: 48px;
     width: 48px;
     margin-left: 16px;
+    
   }
   
   .left {
